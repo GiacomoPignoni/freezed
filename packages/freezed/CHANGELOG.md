@@ -1,3 +1,26 @@
+## 2.5.7 - 2024-07-15
+
+- `freezed_annotation` upgraded to `2.4.4`
+
+## 2.5.6 - 2024-07-09
+
+- Generate documentation for `copyWith` (thanks to @rekire)
+
+## 2.5.5 - 2024-07-09
+
+- Stop using `JsonKey(ignore: true)` in favour of `JsonKey(includeFromJson: false, includeToJson: false)`
+  (thanks to @lrsvmb)
+- Require json_annotation ^6.8.0
+
+## 2.5.4 - 2024-07-02
+
+- Require Dart >=3.0.0
+- Support latest `collection`
+
+## 2.5.3 - 2024-05-14
+
+- Support analyzer 6.5.0
+
 ## 2.5.2 - 2024-04-11
 
 - Fixed `copyWith(value: null)` when using nullable generics

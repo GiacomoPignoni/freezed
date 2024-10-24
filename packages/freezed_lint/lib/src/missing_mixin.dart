@@ -1,5 +1,5 @@
-import 'package:analyzer/error/error.dart';
-import 'package:analyzer/error/listener.dart';
+import 'package:analyzer/error/error.dart' hide LintCode;
+import 'package:analyzer/error/listener.dart' show ErrorReporter;
 import 'package:custom_lint_builder/custom_lint_builder.dart';
 import 'package:freezed_lint/src/tools/freezed_annotation_checker.dart';
 
@@ -27,13 +27,13 @@ class MissingMixin extends DartLintRule {
       final name = '_\$${element.name}';
       final withClause = node.withClause;
       if (withClause == null) {
-        reporter.reportErrorForElement(code, element, [name]);
+        reporter.atElement(element, _code, arguments: [name]);
         return;
       }
 
       final mixins = withClause.mixinTypes;
       if (mixins.any((m) => name == m.name2.lexeme)) return;
-      reporter.reportErrorForElement(code, element, [name]);
+      reporter.atElement(element, _code, arguments: [name]);
     });
   }
 

@@ -424,7 +424,7 @@ ${whenOrNullPrototype(data.constructors)} {
     return constructor.impliedProperties.expand((p) {
       return [
         if (commonProperties.any((element) => element.name == p.name))
-          '@override ${p.abstractGetter}'
+          p.abstractGetter.toString(shouldOverride: true)
         else
           '${p.abstractGetter}',
         if (!p.isFinal) p.abstractSetter,
@@ -488,7 +488,7 @@ bool operator ==(Object other) {
     if (!data.generateEqual) return '';
 
     final jsonKey = data.generateFromJson || data.generateToJson
-        ? '@JsonKey(ignore: true)'
+        ? '@JsonKey(includeFromJson: false, includeToJson: false)'
         : '';
 
     final hashedProperties = [
@@ -559,7 +559,7 @@ extension DefaultValue on ParameterElement {
 }
 
 String? parseTypeSource(VariableElement element) {
-  String? type = element.type.getDisplayString(withNullability: true);
+  String? type = element.type.getDisplayString();
 
   if ((type.contains('dynamic') || type.contains('InvalidType')) &&
       element.nameOffset > 0) {
@@ -578,6 +578,5 @@ String? parseTypeSource(VariableElement element) {
   return resolveFullTypeStringFrom(
     element.library!,
     element.type,
-    withNullability: true,
   );
 }
